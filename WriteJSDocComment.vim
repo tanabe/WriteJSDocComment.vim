@@ -2,7 +2,7 @@
 "
 "setting: 
 "  1.
-"    write keymap in .vimrc
+"    assign keymap at .vimrc
 "    au FileType javascript nnoremap <buffer> <C-c>  :<C-u>call WriteJSDocComment()<CR>
 "  2.
 "   If cursor is on function line, call WriteJSDocComment then
