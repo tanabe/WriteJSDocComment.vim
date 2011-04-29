@@ -1,3 +1,13 @@
+"insert JSDoc comment [not good]
+"
+"setting: 
+"  1.
+"    write keymap in .vimrc
+"    au FileType javascript nnoremap <buffer> <C-c>  :<C-u>call WriteJSDocComment()<CR>
+"  2.
+"   If cursor is on function line, call WriteJSDocComment then
+"   append the JSDoc-like comment.
+
 function! WriteJSDocComment()
   let params = []
   let line = getline('.')
