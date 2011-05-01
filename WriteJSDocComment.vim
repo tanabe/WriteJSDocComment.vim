@@ -1,35 +1,28 @@
-"insert JSDoc comment [not good]
+" WriteJSDocComment.vim
+" write JSDoc comment macro
+" *this script need perl interface
+" 
+" Author: Hideaki Tanabe <tanablog@gmail.com>
 "
-"setting: 
+" Setting: 
 "  1.
-"    assign keymap at .vimrc
-"    au FileType javascript nnoremap <buffer> <C-c>  :<C-u>call WriteJSDocComment()<CR>
+"   install in ~/.vim/ftplugin/javascript/
 "  2.
-"   If cursor is on function line, call WriteJSDocComment then
-"   append the JSDoc-like comment.
+"   assign keymap at .vimrc for example
+"   au FileType javascript nnoremap <buffer> <C-c>  :<C-u>call WriteJSDocComment()<CR>
 
 function! WriteJSDocComment()
-  let params = []
-  let line = getline('.')
-  let matches = matchlist(line, '([^)]\+)')
-  if (len(matches))
-    let arguments = matches[0]
-    let arguments = substitute(arguments, '[() ]', '', 'g')
-    let params = reverse(split(arguments, ','))
-  endif
-  
-  let c = col(".")
-  let l = a:firstline - 1
-  let s = ''
-  while len(s) < (c - 1)
-    let s = s . " "
-  endwhile
-  call append(l, s . ' */')
-  if (len(params))
-    for param in params
-      call append(l, s . ' *'. ' @param ' . expand(param). ' ')
-    endfor
-  endif
-  call append(l, s . ' *')
-  call append(l, s . '/**')
+if has('perl')
+perl << EOF
+  @pos = $curwin->Cursor();
+  $row = @pos[0];
+  $col = @pos[1];
+  $line = $curbuf->Get($row);
+  @params = $line =~ /\((.*)\)/g;
+  @params = split(/\s*,\s*/, @params[0]);
+  @params = map {' * @param ' . $_ . " "} @params;
+  @comments = map {" " x $col . $_} ("/**" , " * ", @params, " */");
+  $curbuf->Append(@pos[0] - 1, @comments);
+EOF
+endif
 endfunction
