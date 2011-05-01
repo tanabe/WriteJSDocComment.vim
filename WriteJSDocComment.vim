@@ -22,15 +22,12 @@ perl << EOF
     $row++;
     while (($brace_count > 0) || ($limit < 0)) {
       if ($row > $curbuf->Count()) {
-        #VIM::Msg("no found");
         return false;
       }
       my $line = $curbuf->Get($row);
       $brace_count++ if $line =~ /{/g;
       $brace_count-- if $line =~ /}/g;
-      #VIM::Msg($brace_count);
       if ($brace_count == 1) {
-        #VIM::Msg($line . "found");
         return true if $line =~ /return/g;
       }
       $limit--;
