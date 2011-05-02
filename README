@@ -1,0 +1,12 @@
+WriteJSDocComment.vim
+write JSDoc comment
+Caution: this script need perl interface (+perlinterp)
+
+Author: Hideaki Tanabe <tanablog@gmail.com>
+
+setting: 
+ 1.
+  install in ~/.vim/ftplugin/javascript/
+ 2.
+  assign keymap at .vimrc for example
+  au FileType javascript nnoremap <buffer> <C-c>  :<C-u>call WriteJSDocComment()<CR>
