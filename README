@@ -1,9 +1,9 @@
 WriteJSDocComment.vim
 write JSDoc comment
-Caution: this script need perl interface (+perlinterp)
-
+Version: 0.2
 Author: Hideaki Tanabe <tanablog@gmail.com>
 
+Caution: this script need perl interface (compile with +perlinterp)
 setting: 
  1.
   install in ~/.vim/ftplugin/javascript/
