@@ -40,7 +40,7 @@ perl << EOF
   # get the name of function
   sub get_function_name {
     $line = shift;
-    if ($line =~ /(\w+)\s*=\s*function/g) {
+    if ($line =~ /(\w+)\s*(:|=)\s*function/g) {
       return $1;
     } elsif ($line =~ /function \s*(\w+)\s*\(/g) {
       return $1;
